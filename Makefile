@@ -6,7 +6,7 @@
 #    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/14 13:39:24 by lmattern         ###   ########.fr        #
+#    Updated: 2024/05/14 15:57:24 by lmattern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,10 @@ $(OBJDIR)/%.o: $(MAINDIR)/%.c $(DEPS) | $(OBJDIR)
 $(LIBFT)/libft.a: FORCE
 	@make -C $(LIBFT) -s
 
-$(MINILIBX)/libft.a: FORCE
+$(MINILIBX)/libmlx.a: FORCE
 	@make -C $(MINILIBX) -s
 
-$(NAME): $(LIBFT)/libft.a $(OBJS) | $(OBJDIR)
+$(NAME): $(LIBFT)/libft.a $(MINILIBX)/libmlx.a $(OBJS) | $(OBJDIR)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(CFLAGS) -lreadline -o $(NAME)
 
 spinner:
@@ -82,6 +82,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C $(LIBFT) -s
+	@make clean -C $(MINILIBX) -s
 
 re: fclean all
 
