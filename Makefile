@@ -6,12 +6,11 @@
 #    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/14 15:57:24 by lmattern         ###   ########.fr        #
+#    Updated: 2024/05/14 16:03:53 by lmattern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all, clean, FORCE, fclean, re, bash_spinner, stop_bash_spinner, \
-bonus, zsh_spinner, stop_zsh_spinner
+.PHONY: all, clean, FORCE, fclean, re
 
 CC					:=	cc
 NAME				:=	cub3D
