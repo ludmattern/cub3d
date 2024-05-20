@@ -6,7 +6,7 @@
 #    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/14 16:03:53 by lmattern         ###   ########.fr        #
+#    Updated: 2024/05/20 16:04:59 by lmattern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,19 +25,32 @@ PATHLIBS			:=	$(LIBFT)/libft.a $(MINILIBX)/libmlx.a
 
 DEPS				:=	./inc/cub3D.h
 
-MAINDIR				:=	./src/
+MAINDIR				:=	./src
+PARSEDIR			:=	./src/parsing
+UTILSDIR			:=	./src/utils
 
-MAIN_SRC			:=	$(MAINDIR)/main.c
+MAIN_SRC			:=	$(MAINDIR)/main.c \
+						$(MAINDIR)/initial_steps.c
+PARSE_SRC			:=	$(PARSEDIR)/parse_colors.c \
+						$(PARSEDIR)/parse_colors_utils.c \
+						$(PARSEDIR)/parse_check_lines.c \
+						$(PARSEDIR)/parse_lines.c \
+						$(PARSEDIR)/parse_parameters.c \
+						$(PARSEDIR)/parse_textures.c \
+						$(PARSEDIR)/parse_check_map.c
+UTILS_SRC			:=	$(UTILSDIR)/utils_memory.c
 
 OBJDIR				:=	./.obj
 
 MAIN_OBJ			:=	$(MAIN_SRC:$(MAINDIR)/%.c=$(OBJDIR)/%.o)
+PARSE_OBJ			:=	$(PARSE_SRC:$(PARSEDIR)/%.c=$(OBJDIR)/%.o)
+UTILS_OBJ			:=	$(UTILS_SRC:$(UTILSDIR)/%.c=$(OBJDIR)/%.o)
 
-OBJS				:=	$(MAIN_OBJ)
+OBJS				:=	$(UTILS_OBJ) $(PARSE_OBJ) $(MAIN_OBJ) 
 
 all : spinner $(LIBFT) $(MINILIBX) $(NAME) stop_spinner
 
-$(OBJDIR)/%.o: $(EXECDIR)/%.c $(DEPS) | $(OBJDIR)
+$(OBJDIR)/%.o: $(UTILSDIR)/%.c $(DEPS) | $(OBJDIR)
 	@$(CC) $(CFLAGS) -g -o $@ -c $< $(HEADERS)
 
 $(OBJDIR)/%.o: $(PARSEDIR)/%.c $(DEPS) | $(OBJDIR)
@@ -84,5 +97,9 @@ fclean: clean
 	@make clean -C $(MINILIBX) -s
 
 re: fclean all
+
+valgrind: all
+	@clear
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) ./map.cub
 
 FORCE:
