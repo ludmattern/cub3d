@@ -6,7 +6,7 @@
 #    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/20 16:04:59 by lmattern         ###   ########.fr        #
+#    Updated: 2024/05/20 16:38:44 by lmattern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 CC					:=	cc
 NAME				:=	cub3D
 CFLAGS				:=	-Wextra -Wall -Werror
+MLXFLAGS			:=	-lXext -lX11 -lm
 LIBFT				:=	./libft
 MINILIBX			:=	./minilibx-linux
 
@@ -27,6 +28,7 @@ DEPS				:=	./inc/cub3D.h
 
 MAINDIR				:=	./src
 PARSEDIR			:=	./src/parsing
+EXECDIR				:=	./src/exec
 UTILSDIR			:=	./src/utils
 
 MAIN_SRC			:=	$(MAINDIR)/main.c \
@@ -38,15 +40,21 @@ PARSE_SRC			:=	$(PARSEDIR)/parse_colors.c \
 						$(PARSEDIR)/parse_parameters.c \
 						$(PARSEDIR)/parse_textures.c \
 						$(PARSEDIR)/parse_check_map.c
+EXEC_SRC			:=	$(EXECDIR)/calc_wall_dim.c \
+						$(EXECDIR)/draw_scene.c \
+						$(EXECDIR)/exec_start.c \
+						$(EXECDIR)/exit.c \
+						$(EXECDIR)/move_amd_cam.c
 UTILS_SRC			:=	$(UTILSDIR)/utils_memory.c
 
 OBJDIR				:=	./.obj
 
 MAIN_OBJ			:=	$(MAIN_SRC:$(MAINDIR)/%.c=$(OBJDIR)/%.o)
 PARSE_OBJ			:=	$(PARSE_SRC:$(PARSEDIR)/%.c=$(OBJDIR)/%.o)
+EXEC_OBJ			:=	$(EXEC_SRC:$(EXECDIR)/%.c=$(OBJDIR)/%.o)
 UTILS_OBJ			:=	$(UTILS_SRC:$(UTILSDIR)/%.c=$(OBJDIR)/%.o)
 
-OBJS				:=	$(UTILS_OBJ) $(PARSE_OBJ) $(MAIN_OBJ) 
+OBJS				:=	$(UTILS_OBJ) $(PARSE_OBJ) $(EXEC_OBJ) $(MAIN_OBJ)
 
 all : spinner $(LIBFT) $(MINILIBX) $(NAME) stop_spinner
 
@@ -54,6 +62,9 @@ $(OBJDIR)/%.o: $(UTILSDIR)/%.c $(DEPS) | $(OBJDIR)
 	@$(CC) $(CFLAGS) -g -o $@ -c $< $(HEADERS)
 
 $(OBJDIR)/%.o: $(PARSEDIR)/%.c $(DEPS) | $(OBJDIR)
+	@$(CC) $(CFLAGS) -g -o $@ -c $< $(HEADERS)
+
+$(OBJDIR)/%.o: $(EXECDIR)/%.c $(DEPS) | $(OBJDIR)
 	@$(CC) $(CFLAGS) -g -o $@ -c $< $(HEADERS)
 
 $(OBJDIR)/%.o: $(MAINDIR)/%.c $(DEPS) | $(OBJDIR)
@@ -66,7 +77,7 @@ $(MINILIBX)/libmlx.a: FORCE
 	@make -C $(MINILIBX) -s
 
 $(NAME): $(LIBFT)/libft.a $(MINILIBX)/libmlx.a $(OBJS) | $(OBJDIR)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(CFLAGS) -lreadline -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(CFLAGS) $(MLXFLAGS) -lreadline -o $(NAME)
 
 spinner:
 	@echo "\033[1;32mCompiling cub3D ....\c\033[0m"

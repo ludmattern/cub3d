@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 16:02:26 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:45:16 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,25 @@ void	print_map(t_map *map)
 	}
 }
 
+void	replace_two_by_zero(t_map *map)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->grid[i][j] == '2')
+				map->grid[i][j] = '0';
+			j++;
+		}
+		i++;
+	}
+}
+
 int	check_map_validity(t_map *map)
 {
 	size_t	row;
@@ -119,5 +138,6 @@ int	check_map_validity(t_map *map)
 			}
 		}
 	}
+	replace_two_by_zero(map);
 	return (SUCCESS);
 }
