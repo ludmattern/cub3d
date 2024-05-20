@@ -6,18 +6,16 @@
 /*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/14 15:52:15 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/15 10:55:34 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-
-
 int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-	ft_printf("test\n");
+	start_exec();
 	return (0);
 }
