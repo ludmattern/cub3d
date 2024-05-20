@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strnrcmp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 09:47:01 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/19 09:53:07 by lmattern         ###   ########.fr       */
+/*   Created: 2024/05/16 13:28:22 by lmattern          #+#    #+#             */
+/*   Updated: 2024/05/16 13:41:36 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-long	ft_atoi(const char *nptr)
+int	ft_strnrcmp(const char *s1, const char *s2, size_t n)
 {
-	long	result;
-	int		sign;
+	size_t	len1;
+	size_t	len2;
 
-	result = 0;
-	sign = 1;
-	while ((*nptr >= '\t' && *nptr <= '\r') || *nptr == ' ')
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	if (len2 > len1 || !n)
+		return (1);
+	s1 += len1 - 1;
+	s2 += len2 - 1;
+	while (n && len2 && *s1 == *s2)
 	{
-		if (*nptr == '-')
-			sign = -1;
-		nptr++;
+		s1--;
+		s2--;
+		len2--;
+		n--;
 	}
-	while (*nptr >= '0' && *nptr <= '9')
-	{
-		if (result * sign > INT_MAX)
-			return (-1);
-		result = result * 10 + (*nptr - '0');
-		nptr++;
-	}
-	return ((int)(result * sign));
+	if (!n || !len2)
+		return (0);
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

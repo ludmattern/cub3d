@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_check_extension.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 09:47:01 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/19 09:53:07 by lmattern         ###   ########.fr       */
+/*   Created: 2024/05/16 13:55:51 by lmattern          #+#    #+#             */
+/*   Updated: 2024/05/16 14:18:37 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-long	ft_atoi(const char *nptr)
+size_t	skip_prefix(char *program)
 {
-	long	result;
-	int		sign;
+	size_t	len;
 
-	result = 0;
-	sign = 1;
-	while ((*nptr >= '\t' && *nptr <= '\r') || *nptr == ' ')
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
+	len = 0;
+	if (!program)
+		return (0);
+	if (ft_strchr(program, '/'))
 	{
-		if (*nptr == '-')
-			sign = -1;
-		nptr++;
+		while (program[len] != '/')
+			len++;
+		len++;
 	}
-	while (*nptr >= '0' && *nptr <= '9')
+	return (len);
+}
+
+int	ft_check_extension(char *program, char *file, char *ext)
+{
+	if (ft_strnrcmp(file, ext, ft_strlen(ext)))
 	{
-		if (result * sign > INT_MAX)
-			return (-1);
-		result = result * 10 + (*nptr - '0');
-		nptr++;
+		ft_eprintf("Error\n%s only accepts %s files\n", program + 
+		skip_prefix(program), ext);
+		return(0);
 	}
-	return ((int)(result * sign));
+	return (1);
 }

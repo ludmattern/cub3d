@@ -3,12 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+         #
+#    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/07 18:59:44 by fprevot          ###   ########.fr        #
+#    Updated: 2024/05/17 13:53:15 by lmattern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+.PHONY: all clean fclean re
 
 FLAGS= 	-Wall -Werror -Wextra
 
@@ -36,11 +38,10 @@ SRCS= 	./src/ft_isalpha.c ./src/ft_isdigit.c ./src/ft_isalnum.c \
 		./src/ft_strncpy.c ./src/ft_strcpy.c ./src/ft_realloc.c \
 		./src/ft_free_double_array.c ./src/ft_isspace.c \
 		./src/ft_double_array_len.c ./src/ft_free.c ./src/ft_sprintf_fmt.c \
-		./src/ft_sprintf.c ./src/ft_str_signed_char.c
+		./src/ft_sprintf.c ./src/ft_str_signed_char.c ./src/ft_strnrcmp.c \
+		./src/ft_check_extension.c ./src/ft_close.c
 
 OBJS= 	$(SRCS:.c=.o)
-
-.PHONY: all clean fclean re
 
 all:	$(NAME)
 
