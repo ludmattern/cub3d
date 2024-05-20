@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:13 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 16:03:15 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:33:56 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../inc/cub3D.h"
 
 void	ctx_scene_init(t_scene_ctx *ctx, t_ray *rc, int x)
 {
@@ -133,7 +133,7 @@ void	dda(t_scene_ctx *ctx, t_ray *rc)
 			ctx->map_y += ctx->step_y;
 			ctx->side = 1; // le mur touché est horizontal
 		}
-		if (rc->map->map[ctx->map_y][ctx->map_x] > 0) // stop si murs
+		if (rc->map->grid[ctx->map_y][ctx->map_x] > 0) // stop si murs
 		{
 			ctx->hit = 1; //MUrs touche
 			ctx->texture_num = get_tex_num(ctx); // get la texture du murs

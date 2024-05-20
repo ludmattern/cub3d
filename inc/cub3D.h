@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 16:09:30 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:43:18 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 # include "../libft/inc/get_next_line.h"
+# include "../minilibx-linux/mlx.h"
+# include <stdlib.h>
+# include <math.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <stdio.h>
 # include <stdbool.h>
 
 # define ERROR		0
@@ -25,6 +29,7 @@
 # define ERR		"Error\n"
 # define ALLOC_ERR	"Failed to allocate memory"
 
+/* parsing structures */
 typedef struct	s_position
 {
 	int			row;
@@ -80,39 +85,7 @@ typedef struct s_cub
 	t_textures	textures;
 }				t_cub;
 
-/* initialisation and first checks */
-int		check_program_args(int argc, char **argv);
-int		check_submitted_file(char *file, int *filefd);
-t_cub	*init_cub_data_struct(void);
-
-/* general parsing */
-int		parse_parameters(t_cub *cub);
-
-/* texture parsing */
-int		process_texture(t_cub *cub, char *line);
-
-/* color parsing */
-int		process_style(t_cub *cub, char *line);
-void	init_color_map(t_color_map *color_map, t_cub *cub);
-int		check_color_input(char *color);
-int		check_comma(char *str, const char *line);
-int		validate_rgb_range(int *value, const char *str);
-
-/* map parsing */
-int		parse_lines(t_cub *cub, char **lines);
-int		extract_map_lines(t_cub *cub, char **line, char ***lines);
-int		skip_empty_lines(int fd, char **line);
-int		check_end_of_file(int fd, char **line);
-int		check_map_validity(t_map *map);
-
-/* freeing memory */
-int		clean_exit(t_cub *cub, int exit_code);
-int		clean_return(char *line, char **lines, int status);
-# include "../minilibx-linux/mlx.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <math.h>
-
+/* execution structures */
 typedef struct s_texture
 {
 	void	*img;
@@ -123,13 +96,6 @@ typedef struct s_texture
 	int		line_length;
 	int		endian;
 }	t_texture;
-
-typedef struct s_map
-{
-	int	width;
-	int	height;
-	int	**map;
-}	t_map;
 
 typedef struct s_data_img
 {
@@ -190,14 +156,49 @@ typedef struct s_ray
 	t_texture	textures[4];
 }	t_ray;
 
-void	start_exec(void);
-void	draw_scene(t_ray *rc, int x);
-int		handle_keyrelease(int keycode, t_ray *rc);
+/* initialisation and first checks */
+int		check_program_args(int argc, char **argv);
+int		check_submitted_file(char *file, int *filefd);
+t_cub	*init_cub_data_struct(void);
+
+/* general parsing */
+int		parse_parameters(t_cub *cub);
+
+/* texture parsing */
+int		process_texture(t_cub *cub, char *line);
+
+/* color parsing */
+int		process_style(t_cub *cub, char *line);
+void	init_color_map(t_color_map *color_map, t_cub *cub);
+int		check_color_input(char *color);
+int		check_comma(char *str, const char *line);
+int		validate_rgb_range(int *value, const char *str);
+
+/* map parsing */
+int		parse_lines(t_cub *cub, char **lines);
+int		extract_map_lines(t_cub *cub, char **line, char ***lines);
+int		skip_empty_lines(int fd, char **line);
+int		check_end_of_file(int fd, char **line);
+int		check_map_validity(t_map *map);
+
+
+/* execution */
+void	start_exec(t_cub *cub);
+
+/* raycasting */
 int		update_frame(t_ray *rc);
-int		handle_keypress(int keycode, t_ray *rc);
-void	free_all(t_ray *rc);
 void	calc_wall_dimensions(t_scene_ctx *ctx, t_ray *rc);
+void	draw_scene(t_ray *rc, int x);
 
-void free_map(t_map *map);
+/* key handling */
+int		handle_keyrelease(int keycode, t_ray *rc);
+int		handle_keypress(int keycode, t_ray *rc);
 
+/* freeing memory */
+int		clean_exit(t_cub *cub, int exit_code);
+int		clean_return(char *line, char **lines, int status);
+void	free_all(t_ray *rc);
+
+/////////////////////////////////* DEBUG *////////////////////////////////////
+void	print_map(t_map *map);
 #endif	

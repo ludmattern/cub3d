@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 16:09:48 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:45:26 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static int	parsing_data(t_cub *cub)
 	if (!check_map_validity(&cub->map))
 		return (ERROR);
 	close(cub->filefd);
-	ft_free_double_int_array(cub->map.grid, cub->map.height);
 	return (SUCCESS);
 }
 
@@ -51,6 +50,11 @@ int	main(int argc, char **argv)
 		return (clean_exit(cub, EXIT_FAILURE));
 	if (!parsing_data(cub))
 		return (clean_exit(cub, EXIT_FAILURE));
+	printf("Parsing done\n");
+	print_map(&cub->map);
+	start_exec(cub);
+	printf("Execution done\n");
+	ft_free_double_int_array(cub->map.grid, cub->map.height);
 	return (clean_exit(cub, EXIT_SUCCESS));
 }
 

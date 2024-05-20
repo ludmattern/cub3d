@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   calc_wall_dim.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:18 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 16:03:22 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/20 16:33:49 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3D.h"
+#include "../inc/cub3D.h"
 
 void	calc_wall_distance(t_scene_ctx *ctx, t_ray *rc)
 {
