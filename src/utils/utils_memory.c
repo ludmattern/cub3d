@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   freeing_memory.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 07:29:01 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/17 14:52:57 by lmattern         ###   ########.fr       */
+/*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
+/*   Updated: 2024/05/20 08:59:55 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../inc/cub3D.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	clean_exit(t_cub *cub, int exit_code)
 {
-	if (!n)
-		return (0);
-	while (n > 0 && *s1 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-		n--;
-	}
-	if (!n)
-		return (0);
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	ft_close(cub->filefd);
+	ft_free(cub->textures.no);
+	ft_free(cub->textures.so);
+	ft_free(cub->textures.we);
+	ft_free(cub->textures.ea);
+	ft_free(cub);
+	return (exit_code);
+}
+
+int	clean_return(char *line, char **lines, int status)
+{
+	ft_free(line);
+	get_next_line(-1);
+	ft_free_double_array(lines);
+	return (status);
 }

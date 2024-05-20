@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 12:41:15 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/07 18:59:06 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/19 17:52:30 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <string.h>
+# include "./ft_printf.h"
 
 typedef struct s_list
 {
@@ -38,6 +39,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_str_signed_chr(const char *s, int c);
 char	*ft_strndup(const char *s, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strnrcmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
@@ -79,5 +81,9 @@ void	ft_free_double_array(char **double_tab);
 bool	ft_isspace(char c);
 size_t	ft_double_array_len(char **array);
 void	ft_free(void *ptr);
+int		ft_check_extension(char *program, char *file, char *ext);
+size_t	skip_prefix(char *program);
+int		ft_close(int fd);
+void	ft_free_double_int_array(int **double_array, size_t size);
 
 #endif
