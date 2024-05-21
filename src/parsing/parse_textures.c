@@ -6,12 +6,16 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 09:11:15 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:59:57 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function extracts the texture path from the line and allocates memory for 
+it.
+*/
 static int	extract_and_parse_texture(char **texture, const char *line)
 {
 	size_t	i;
@@ -30,6 +34,11 @@ static int	extract_and_parse_texture(char **texture, const char *line)
 	return (SUCCESS);
 }
 
+/*
+this function initializes the texture map with the texture prefix and the right
+texture pointer. It's used to parse the textures from the .cub file and assign
+them to the right pointer quickly.
+*/
 static void	init_texture_map(t_texture_map	*texture_map, t_cub *cub)
 {
 	texture_map[0] = (t_texture_map){"NO ", &cub->textures.no};
@@ -39,10 +48,15 @@ static void	init_texture_map(t_texture_map	*texture_map, t_cub *cub)
 	texture_map[4] = (t_texture_map){NULL, NULL};
 }
 
+/*
+this function checks if the texture path is valid.
+*/
 static int	check_texture_path(char *path, char *type)
 {
 	int	fd;
 
+	if (!ft_check_extension("cub3D", path, ".xpm"))
+		return (ERROR);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (ft_eprintf(ERR"%s is not valid %s path\n", path, type), ERROR);
@@ -50,6 +64,10 @@ static int	check_texture_path(char *path, char *type)
 	return (SUCCESS);
 }
 
+/*
+this function parses the textures from the .cub file and assigns them to the
+cub data structure.
+*/
 int	process_texture(t_cub *cub, char *line)
 {
 	size_t			j;

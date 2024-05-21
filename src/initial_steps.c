@@ -6,12 +6,15 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 16:05:10 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:01:25 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function checks if the program has the right number of arguments
+*/
 int	check_program_args(int argc, char **argv)
 {
 	if (argc != 2)
@@ -23,6 +26,9 @@ int	check_program_args(int argc, char **argv)
 	return (SUCCESS);
 }
 
+/*
+this function checks if the file is a valid .cub file
+*/
 int	check_submitted_file(char *file, int *filefd)
 {
 	int	fd;
@@ -34,6 +40,9 @@ int	check_submitted_file(char *file, int *filefd)
 	return (SUCCESS);
 }
 
+/*
+this function initializes the cub data structure and returns it
+*/
 t_cub	*init_cub_data_struct(void)
 {
 	t_cub	*cub;

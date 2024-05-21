@@ -6,12 +6,16 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 09:10:54 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:07:36 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function extracts the color values from the line and returns them as a 
+string.
+*/
 static char	*extract_colors_string_values(const char *line, size_t len)
 {
 	size_t	i;
@@ -25,6 +29,9 @@ static char	*extract_colors_string_values(const char *line, size_t len)
 		return (ft_strdup(line + i));
 }
 
+/*
+this function checks if the color string is valid.
+*/
 static char	**split_and_check_color_string_format(char *str)
 {
 	char	**rgb;
@@ -40,6 +47,10 @@ static char	**split_and_check_color_string_format(char *str)
 	return (free(str), rgb);
 }
 
+/*
+this function checks if the rgb color range value are valid then stores them in
+the color integer pointer as a 24 bits color.
+*/
 static int	parse_colors_to_struct(int *color, char **rgb)
 {
 	int	value;
@@ -64,6 +75,10 @@ static int	parse_colors_to_struct(int *color, char **rgb)
 	return (ft_free_double_array(rgb), SUCCESS);
 }
 
+/*
+this function extracts the color values from the line, checks if the color is
+valid and stores it in the cub data structure.
+*/
 static int	extract_and_parse_colors(int *color, const char *line)
 {
 	char	*tmp;
@@ -82,6 +97,10 @@ static int	extract_and_parse_colors(int *color, const char *line)
 	return (SUCCESS);
 }
 
+/*
+this function processes the colors from the .cub file and assigns the color to 
+the cub data structure.
+*/
 int	process_style(t_cub *cub, char *line)
 {
 	size_t			j;

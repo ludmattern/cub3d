@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:02:07 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 17:22:08 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:14:19 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function frees the images used for the textures.
+*/
 void	free_textures(t_ray *rc, int i)
 {
 	while (i < 4)
@@ -22,6 +25,9 @@ void	free_textures(t_ray *rc, int i)
 	}
 }
 
+/*
+this function frees the mlx pointers.
+*/
 void free_mlx(t_ray *rc)
 {
 	//free_textures(rc, 0);
@@ -33,6 +39,9 @@ void free_mlx(t_ray *rc)
 		free(rc->mlx);
 }
 
+/*
+this function frees all the pointers used by the execution of the program.
+*/
 void free_all(t_ray *rc)
 {
 	free_mlx(rc);
