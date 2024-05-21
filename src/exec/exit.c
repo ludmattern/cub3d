@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:02:07 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:35:13 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:41:49 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_textures(t_ray *rc, int i)
 /*
 this function frees the mlx pointers.
 */
-void free_mlx(t_ray *rc)
+void	free_mlx(t_ray *rc)
 {
 	free_textures(rc, 0);
 	if (rc->win)
@@ -42,7 +42,7 @@ void free_mlx(t_ray *rc)
 /*
 this function frees all the pointers used by the execution of the program.
 */
-void free_all(t_ray *rc)
+void	free_all(t_ray *rc)
 {
 	free_mlx(rc);
 	free(rc);
