@@ -117,7 +117,6 @@ void	init_player_dir(t_cub *cub, t_ray *rc)
 	}
 }
 
-t_ray *init_raycasting(t_cub *cub)
 /*
 this function initializes the raycasting structure according to the cub data
 structure and returns the raycasting structure.
@@ -145,6 +144,13 @@ t_ray	*init_raycasting(t_cub *cub)
 	rc->ceiling_color = cub->styles.ceiling;
 	load_textures(rc, cub->textures);
 	return (rc);
+}
+
+int	handle_destroy(t_ray *rc)
+{
+	free_all(rc);
+	exit(0);
+	return (0);
 }
 
 /*

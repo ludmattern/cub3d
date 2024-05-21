@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:13 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:32:47 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:37:26 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 this function initializes the context structure with the values needed to draw
 the scene.
 */
-void	ctx_scene_init(t_scene_ctx *ctx, t_ray *rc, int x, t_cub *cub)
+void	ctx_scene_init(t_scene_ctx *ctx, t_ray *rc, int x)
 {
 	ctx->camera_x = 2 * x / (double)rc->win_width - 1; // direction de la cam
 	ctx->ray_dir_x = rc->dir_x + rc->plane_x * ctx->camera_x; // direction x du rayon 
@@ -167,7 +167,7 @@ void	dda(t_scene_ctx *ctx, t_ray *rc)
 /*
 this function draws the scene pixel by pixel on the x axis of the screen.
 */
-void	draw_scene(t_ray *rc, int x, t_cub *cub)
+void	draw_scene(t_ray *rc, int x)
 {
 	t_data_img	img;
 	t_scene_ctx	*ctx;
