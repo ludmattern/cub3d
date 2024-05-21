@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_check_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 18:03:28 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 10:47:23 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,26 +79,7 @@ static int	flood_fill(t_map *map, int start_row, int start_col)
 	return (free(stack), SUCCESS);
 }
 
-void	print_map(t_map *map)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			ft_printf("%d", map->grid[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-}
-
-void	replace_two_by_zero(t_map *map)
+void	replace_two_by_zeros(t_map *map)
 {
 	size_t	i;
 	size_t	j;
@@ -138,6 +119,6 @@ int	check_map_validity(t_map *map)
 			}
 		}
 	}
-	replace_two_by_zero(map);
+	replace_two_by_zeros(map);
 	return (SUCCESS);
 }
