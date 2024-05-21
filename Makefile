@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+         #
+#    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/21 13:10:57 by fprevot          ###   ########.fr        #
+#    Updated: 2024/05/21 14:05:31 by lmattern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,6 @@ re: fclean all
 
 valgrind: all
 	@clear
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) ./map.cub
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) ./maps/map.cub
 
 FORCE:
