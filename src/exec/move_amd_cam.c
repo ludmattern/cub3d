@@ -6,7 +6,7 @@
 /*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:24 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 18:08:20 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:05:12 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,25 @@ void	rotate_camera(t_ray *rc, double ms)
 	if (rc->cam_right)
 	{
 		old_dir_x = rc->dir_x;
-		rc->dir_x = rc->dir_x * cos(-ms) - rc->dir_y * sin(-ms);
-		rc->dir_y = old_dir_x * sin(-ms) + rc->dir_y * cos(-ms);
-		old_plane_x = rc->plane_x;
-		rc->plane_x = rc->plane_x * cos(-ms) - rc->plane_y * sin(-ms);
-		rc->plane_y = old_plane_x * sin(-ms) + rc->plane_y * cos(-ms);
-	}
-	if (rc->cam_left)
-	{
-		old_dir_x = rc->dir_x;
 		rc->dir_x = rc->dir_x * cos(ms) - rc->dir_y * sin(ms);
 		rc->dir_y = old_dir_x * sin(ms) + rc->dir_y * cos(ms);
 		old_plane_x = rc->plane_x;
 		rc->plane_x = rc->plane_x * cos(ms) - rc->plane_y * sin(ms);
 		rc->plane_y = old_plane_x * sin(ms) + rc->plane_y * cos(ms);
 	}
+	if (rc->cam_left)
+	{
+		old_dir_x = rc->dir_x;
+		rc->dir_x = rc->dir_x * cos(-ms) - rc->dir_y * sin(-ms);
+		rc->dir_y = old_dir_x * sin(-ms) + rc->dir_y * cos(-ms);
+		old_plane_x = rc->plane_x;
+		rc->plane_x = rc->plane_x * cos(-ms) - rc->plane_y * sin(-ms);
+		rc->plane_y = old_plane_x * sin(-ms) + rc->plane_y * cos(-ms);
+	}
 }
 
-int	update_frame(t_ray *rc, t_cub *cub)
+
+int	update_frame(t_ray *rc)
 {
 	double	ms;
 
@@ -81,7 +82,7 @@ int	update_frame(t_ray *rc, t_cub *cub)
 	move_forward_backward(rc, ms);
 	move_left_right(rc, ms);
 	rotate_camera(rc, ms);
-	draw_scene(rc, 0, cub);
+	draw_scene(rc, 0);
 	return (0);
 }
 
