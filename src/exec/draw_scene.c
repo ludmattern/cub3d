@@ -3,14 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+
 /*   Created: 2024/05/20 16:03:13 by fprevot           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/21 14:53:01 by fprevot          ###   ########.fr       */
-=======
-/*   Updated: 2024/05/21 16:23:02 by lmattern         ###   ########.fr       */
->>>>>>> 3b289f015ec284e60f0552fc7d34e9bd1b93b532
+/*   Updated: 2024/05/21 16:28:05 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +120,13 @@ void	draw_scene(t_ray *rc, int x)
 	t_data_img	img;
 	t_scene_ctx	ctx;
 
-	img.img = mlx_new_image(rc->mlx, rc->win_width, rc->win_height);
-	//protect new_image
+	img.img = NULL;//mlx_new_image(rc->mlx, rc->win_width, rc->win_height);
+	if (!img.img)
+	{
+		free_all(rc);
+		exit(0);
+		return ;
+	}
 	img.addr = mlx_get_data_addr(img.img, &img.bits_ppixel, \
 	&img.line_len, &img.endian);
 	img.width = rc->win_width;

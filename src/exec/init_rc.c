@@ -6,7 +6,7 @@
 /*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:05:21 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 16:25:41 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:31:02 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,24 @@ t_ray	*init_raycasting(t_cub *cub)
 	if (!rc)
 		return (NULL);
 	rc->mlx = mlx_init();
-	// protect init
+	if (!rc->mlx)
+	{
+		free(rc);
+		return (NULL);
+	}
 	rc->win_width = 1600;
 	rc->win_height = 1200;
 	rc->win = mlx_new_window(rc->mlx, rc->win_width, rc->win_height, "Cub3D");
-	// protect new_window
+	if (!rc->win)
+	{
+		if (rc->win)
+			mlx_destroy_window(rc->mlx, rc->win);
+		if (rc->mlx)
+			mlx_destroy_display(rc->mlx);
+		free(rc->mlx);
+		free(rc);
+		return (NULL);
+	}
 	rc->pos_x = (double)cub->player.x + 0.5;
 	rc->pos_y = (double)cub->player.y + 0.5;
 	init_player_dir(cub, rc);
