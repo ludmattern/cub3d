@@ -89,30 +89,30 @@ void	init_player_dir(t_cub *cub, t_ray *rc)
 {
 	if (cub->player.heading == 'N')
 	{
-		rc->dir_x = 0;
-		rc->dir_y = -1;
+		rc->dir_x = 0.0;
+		rc->dir_y = -1.01;
 		rc->plane_x = 0.66;
-		rc->plane_y = 0;
+		rc->plane_y = 0.0;
 	}
 	else if (cub->player.heading == 'S')
 	{
-		rc->dir_x = 0;
-		rc->dir_y = 1;
+		rc->dir_x = 0.0;
+		rc->dir_y = 1.01;
 		rc->plane_x = -0.66;
-		rc->plane_y = 0;
+		rc->plane_y = 0.0;
 	}
 	else if (cub->player.heading == 'E')
 	{
-		rc->dir_x = 1;
-		rc->dir_y = 0;
-		rc->plane_x = 0;
+		rc->dir_x = 1.01;
+		rc->dir_y = 0.0;
+		rc->plane_x = 0.0;
 		rc->plane_y = 0.66;
 	}
 	else if (cub->player.heading == 'W')
 	{
-		rc->dir_x = -1;
-		rc->dir_y = 0;
-		rc->plane_x = 0;
+		rc->dir_x = -1.01;
+		rc->dir_y = 0.0;
+		rc->plane_x = 0.0;
 		rc->plane_y = -0.66;
 	}
 }
@@ -130,8 +130,8 @@ t_ray	*init_raycasting(t_cub *cub)
 	rc->win_width = 1600;
 	rc->win_height = 1200;
 	rc->win = mlx_new_window(rc->mlx, rc->win_width, rc->win_height, "Cub3D");
-	rc->pos_x = (double)cub->player.x + 0.1;
-	rc->pos_y = (double)cub->player.y + 0.1;
+	rc->pos_x = (double)cub->player.x + 0.5;
+	rc->pos_y = (double)cub->player.y + 0.5;
 	init_player_dir(cub, rc);
 	rc->map = &cub->map;
 	rc->move_left = 0;

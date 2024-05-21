@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:13 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:50:30 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:43:31 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ this function changes the pixel color in the image.
 void	pixel_put_to_img(t_data_img *data, int x, int y, int color)
 {
 	char	*pix_in_grid;
-	
+
 	pix_in_grid = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)pix_in_grid = color;
 }
