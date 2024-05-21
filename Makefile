@@ -6,7 +6,7 @@
 #    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/21 14:05:31 by lmattern         ###   ########.fr        #
+#    Updated: 2024/05/21 14:54:37 by lmattern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,8 @@ $(MINILIBX)/libmlx.a: FORCE
 	@make -C $(MINILIBX) -s
 
 $(NAME): $(LIBFT)/libft.a $(MINILIBX)/libmlx.a $(OBJS) | $(OBJDIR)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(CFLAGS) $(MLXFLAGS) -lreadline -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(CFLAGS) $(MLXFLAGS) -lreadline \
+	-o $(NAME)
 
 spinner:
 	@echo "\033[1;32mCompiling cub3D ....\c\033[0m"
@@ -113,6 +114,7 @@ re: fclean all
 
 valgrind: all
 	@clear
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) ./maps/map.cub
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes \
+	./$(NAME) ./maps/map.cub
 
 FORCE:
