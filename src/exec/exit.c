@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:02:07 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:14:19 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:35:13 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ this function frees the mlx pointers.
 */
 void free_mlx(t_ray *rc)
 {
-	//free_textures(rc, 0);
+	free_textures(rc, 0);
 	if (rc->win)
 		mlx_destroy_window(rc->mlx, rc->win);
 	if (rc->mlx)
