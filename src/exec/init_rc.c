@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:05:21 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 16:25:08 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:35:28 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	load_texture(t_ray *rc, t_texture *texture, char *path)
 	&texture->width, &texture->height);
 	if (!texture->img)
 		exit(EXIT_FAILURE);
+	// question marks ????
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_ppixel, \
 	&texture->line_len, &texture->endian);
 }
