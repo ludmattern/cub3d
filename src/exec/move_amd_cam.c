@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:24 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:35:27 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:36:01 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	rotate_camera(t_ray *rc, double ms)
 		rc->plane_y = old_plane_x * sin(-ms) + rc->plane_y * cos(-ms);
 	}
 }
-
 
 /*
 this function updates the frame of the game when the player moves or rotates the

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:13 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:37:26 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:50:30 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,9 +170,8 @@ this function draws the scene pixel by pixel on the x axis of the screen.
 void	draw_scene(t_ray *rc, int x)
 {
 	t_data_img	img;
-	t_scene_ctx	*ctx;
+	t_scene_ctx	ctx;
 	
-	ctx = ft_calloc(1, sizeof(t_scene_ctx));
 	img.img = mlx_new_image(rc->mlx, rc->win_width, rc->win_height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 	&img.line_length, &img.endian);
@@ -180,11 +179,11 @@ void	draw_scene(t_ray *rc, int x)
 	img.height = rc->win_height;
 	while (x < rc->win_width)
 	{
-		ctx_scene_init(ctx, rc, x);
-		ray_dir(ctx, rc);
-		dda(ctx, rc);
-		calc_wall_dimensions(ctx, rc);
-		draw_line(ctx, rc, x, &img);
+		ctx_scene_init(&ctx, rc, x);
+		ray_dir(&ctx, rc);
+		dda(&ctx, rc);
+		calc_wall_dimensions(&ctx, rc);
+		draw_line(&ctx, rc, x, &img);
 		x++;
 	}
 	mlx_put_image_to_window(rc->mlx, rc->win, img.img, 0, 0);
