@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:13 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 13:03:52 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:23:02 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	draw_scene(t_ray *rc, int x)
 	t_scene_ctx	ctx;
 
 	img.img = mlx_new_image(rc->mlx, rc->win_width, rc->win_height);
+	//protect new_image
 	img.addr = mlx_get_data_addr(img.img, &img.bits_ppixel, \
 	&img.line_len, &img.endian);
 	img.width = rc->win_width;
