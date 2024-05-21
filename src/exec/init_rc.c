@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:05:21 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 13:24:02 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:25:08 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ t_ray	*init_raycasting(t_cub *cub)
 
 	rc = ft_calloc(1, sizeof(t_ray));
 	rc->mlx = mlx_init();
+	// protect init
 	rc->win_width = 1600;
 	rc->win_height = 1200;
 	rc->win = mlx_new_window(rc->mlx, rc->win_width, rc->win_height, "Cub3D");
+	// protect new_window
 	rc->pos_x = (double)cub->player.x + 0.5;
 	rc->pos_y = (double)cub->player.y + 0.5;
 	init_player_dir(cub, rc);
