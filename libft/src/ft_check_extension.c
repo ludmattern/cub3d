@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:55:51 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/16 14:18:37 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:44:08 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	ft_check_extension(char *program, char *file, char *ext)
 {
 	if (ft_strnrcmp(file, ext, ft_strlen(ext)))
 	{
-		ft_eprintf("Error\n%s only accepts %s files\n", program + 
-		skip_prefix(program), ext);
-		return(0);
+		ft_eprintf("Error\n%s only accepts %s files\n", program
+			+ skip_prefix(program), ext);
+		return (0);
 	}
 	return (1);
 }
