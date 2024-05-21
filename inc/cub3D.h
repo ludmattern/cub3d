@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:01:21 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:32:03 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ typedef struct s_scene_ctx
 	int		draw_start;
 	int		draw_end;
 	int		wall_color;
-	int		ceiling_color;
-	int		floor_color;
 	int		line_height;
 	int		texture_num;
 	double	wall_x;
 	int		texture_x;
 	int		texture_y;
+	int		ceiling_color;
+	int		floor_color;
 }	t_scene_ctx;
 
 typedef struct s_ray
@@ -154,6 +154,8 @@ typedef struct s_ray
 	int			move_left;
 	int			cam_right;
 	int			cam_left;
+	int			ceiling_color;
+	int			floor_color;
 	t_map		*map;
 	t_texture	texture[4];
 }	t_ray;
@@ -188,9 +190,9 @@ int		check_map_validity(t_map *map);
 void	start_exec(t_cub *cub);
 
 /* raycasting */
-int		update_frame(t_ray *rc, t_cub *cub);
+int		update_frame(t_ray *rc);
 void	calc_wall_dimensions(t_scene_ctx *ctx, t_ray *rc);
-void	draw_scene(t_ray *rc, int x, t_cub *cub);
+void	draw_scene(t_ray *rc, int x);
 
 /* key handling */
 int		handle_keyrelease(int keycode, t_ray *rc);
