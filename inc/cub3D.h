@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 12:48:28 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:07:02 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ void	start_exec(t_cub *cub);
 int		update_frame(t_ray *rc);
 void	calc_wall_dimensions(t_scene_ctx *ctx, t_ray *rc);
 void	draw_scene(t_ray *rc, int x);
+void	draw_line(t_scene_ctx *ctx, t_ray *rc, int x, t_data_img *img);
+t_ray	*init_raycasting(t_cub *cub);
 
 /* key handling */
 int		handle_keyrelease(int keycode, t_ray *rc);
