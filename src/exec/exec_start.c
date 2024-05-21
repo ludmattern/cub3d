@@ -74,6 +74,8 @@ void	start_exec(t_cub *cub)
 	t_ray	*rc;
 
 	rc = init_raycasting(cub);
+	if (rc == NULL)
+		return ;
 	mlx_hook(rc->win, 2, 1L << 0, handle_keypress, rc);
 	mlx_hook(rc->win, 3, 1L << 1, handle_keyrelease, rc);
 	mlx_loop_hook(rc->mlx, (int (*)(void *))update_frame, rc);
