@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 16:43:18 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:27:22 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct s_data_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_data_img;
 
 typedef struct s_scene_ctx
@@ -153,7 +155,7 @@ typedef struct s_ray
 	int			cam_right;
 	int			cam_left;
 	t_map		*map;
-	t_texture	textures[4];
+	t_texture	texture[4];
 }	t_ray;
 
 /* initialisation and first checks */
@@ -186,9 +188,9 @@ int		check_map_validity(t_map *map);
 void	start_exec(t_cub *cub);
 
 /* raycasting */
-int		update_frame(t_ray *rc);
+int		update_frame(t_ray *rc, t_cub *cub);
 void	calc_wall_dimensions(t_scene_ctx *ctx, t_ray *rc);
-void	draw_scene(t_ray *rc, int x);
+void	draw_scene(t_ray *rc, int x, t_cub *cub);
 
 /* key handling */
 int		handle_keyrelease(int keycode, t_ray *rc);

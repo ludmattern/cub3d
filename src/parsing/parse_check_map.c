@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_check_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 16:45:16 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:03:28 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	print_map(t_map *map)
 		j = 0;
 		while (j < map->width)
 		{
-			ft_printf("%c", map->grid[i][j]);
+			ft_printf("%d", map->grid[i][j]);
 			j++;
 		}
 		ft_printf("\n");
