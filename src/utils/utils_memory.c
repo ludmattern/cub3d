@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 11:01:19 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:52:58 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	clean_exit(t_cub *cub, int exit_code)
 	ft_free(cub);
 	return (exit_code);
 }
+
 /*
 this function frees the memory allocated for the line and the lines array.
 It's meant to be called during the parsing process.

@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 11:01:25 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:50:37 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ t_cub	*init_cub_data_struct(void)
 		exit(EXIT_FAILURE);
 	}
 	cub->filefd = -1;
+	cub->styles.floor = -1;
+	cub->styles.ceiling = -1;
 	return (cub);
 }

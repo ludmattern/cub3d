@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 11:02:24 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:50:55 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ this function checks if the necessary parameters are present in the .cub file.
 */
 static bool	is_missing_parameters(t_cub *cub)
 {
-	if (!cub->styles.floor
-		|| !cub->styles.ceiling
+	if (cub->styles.floor == -1
+		|| cub->styles.ceiling == -1
 		|| !cub->textures.no
 		|| !cub->textures.so
 		|| !cub->textures.we
