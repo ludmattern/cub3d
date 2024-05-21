@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 10:59:57 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:26:02 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ static int	check_texture_path(char *path, char *type)
 		return (ERROR);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
+	{
+		printf("path: %s\n", path);
 		return (ft_eprintf(ERR"%s is not valid %s path\n", path, type), ERROR);
+	}
 	close(fd);
 	return (SUCCESS);
 }
