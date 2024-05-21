@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_memory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 14:14:38 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:05:42 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,16 @@ int	clean_return(char *line, char **lines, int status)
 	get_next_line(-1);
 	ft_free_double_array(lines);
 	return (status);
+}
+
+int	handle_img_err(t_ray *rc)
+{
+	ft_free_double_int_array(rc->cub->map.grid, rc->cub->map.height);
+	free(rc->cub->textures.ea);
+	free(rc->cub->textures.no);
+	free(rc->cub->textures.so);
+	free(rc->cub->textures.we);
+	free(rc->cub);
+	free_all(rc);
+	return (EXIT_FAILURE);
 }
