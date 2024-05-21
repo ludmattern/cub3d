@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:07 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 16:49:27 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:20:31 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	load_texture(t_ray *rc, t_texture *texture, char *path)
 
 void	load_textures(t_ray *rc, t_textures textures)
 {
-	load_texture(rc, &rc->textures[0], textures.no);
-	load_texture(rc, &rc->textures[1], textures.so);
-	load_texture(rc, &rc->textures[2], textures.ea);
-	load_texture(rc, &rc->textures[3], textures.we);
+	load_texture(rc, &rc->texture[0], textures.no);
+	load_texture(rc, &rc->texture[1], textures.so);
+	load_texture(rc, &rc->texture[2], textures.ea);
+	load_texture(rc, &rc->texture[3], textures.we);
 }
 
 t_ray	*init_raycasting(t_cub *cub)
@@ -78,8 +78,8 @@ t_ray	*init_raycasting(t_cub *cub)
 	rc->win_width = 1600;
 	rc->win_height = 1200;
 	rc->win = mlx_new_window(rc->mlx, rc->win_width, rc->win_height, "Cub3D");
-	rc->pos_x = cub->player.x;
-	rc->pos_y = cub->player.y;
+	rc->pos_x = (double)cub->player.x + 0.1;
+	rc->pos_y = (double)cub->player.y + 0.1;
 	rc->dir_x = -1;// a changer selon la dir (N,W,S,E) du j au debut
 	rc->dir_y = 0;// a changer selon la dir (N,W,S,E) du j au debut
 	rc->plane_x = 0;// le FOV
