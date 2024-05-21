@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 11:13:11 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:20:17 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ this function checks if the map is not too small and if the player is present.
 */
 static int	last_checks(t_cub *cub, bool player, char *line)
 {
-	ft_free(line);
 	if (cub->map.height < 3)
 		return (ft_eprintf(ERR"Map is too small\n"), ERROR);
 	if (!player)
 		return (ft_eprintf(ERR"Player is missing\n"), ERROR);
+	ft_free(line);
 	return (SUCCESS);
 }
 
