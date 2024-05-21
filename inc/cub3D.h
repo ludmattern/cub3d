@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:32:03 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:48:28 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,25 @@
 # define ALLOC_ERR	"Failed to allocate memory"
 
 /* parsing structures */
-typedef struct	s_position
+typedef struct s_position
 {
 	int			row;
 	int			col;
 }				t_pos;
 
-typedef struct	s_texture_map
+typedef struct s_texture_map
 {
 	const char	*prefix;
 	char		**texture;
 }				t_texture_map;
 
-typedef struct	s_color_map
+typedef struct s_color_map
 {
 	const char	*prefix;
 	int			*color;
 }				t_color_map;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	int			**grid;
 	size_t		width;
@@ -92,8 +92,8 @@ typedef struct s_texture
 	char	*addr;
 	int		width;
 	int		height;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bits_ppixel;
+	int		line_len;
 	int		endian;
 }	t_texture;
 
@@ -101,8 +101,8 @@ typedef struct s_data_img
 {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		bits_ppixel;
+	int		line_len;
 	int		endian;
 	int		width;
 	int		height;
@@ -128,9 +128,9 @@ typedef struct s_scene_ctx
 	int		draw_end;
 	int		wall_color;
 	int		line_height;
-	int		texture_num;
+	int		text_num;
 	double	wall_x;
-	int		texture_x;
+	int		text_x;
 	int		texture_y;
 	int		ceiling_color;
 	int		floor_color;
@@ -184,7 +184,6 @@ int		extract_map_lines(t_cub *cub, char **line, char ***lines);
 int		skip_empty_lines(int fd, char **line);
 int		check_end_of_file(int fd, char **line);
 int		check_map_validity(t_map *map);
-
 
 /* execution */
 void	start_exec(t_cub *cub);

@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 11:07:36 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:52:35 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	process_style(t_cub *cub, char *line)
 	{
 		if (ft_strncmp(line, color_map[j].prefix, 2))
 			continue ;
-		if (*(color_map[j].color))
+		if ((*(color_map[j]).color) != -1)
 		{
 			ft_eprintf(ERR"%s color set multiple times\n", color_map[j].prefix);
 			return (free(line), ERROR);
