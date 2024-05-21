@@ -6,7 +6,7 @@
 /*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:05:21 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 13:24:02 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:24:49 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,49 @@
 this function load the texture from the path and stores it in the texture 
 creatingthe mlx image and getting the data address.
 */
-void	load_texture(t_ray *rc, t_texture *texture, char *path)
+int	load_texture(t_ray *rc, t_texture *texture, char *path)
 {
-	texture->img = mlx_xpm_file_to_image(rc->mlx, path, \
-	&texture->width, &texture->height);
+	int	i;
+
+	i = 0;
+	texture->img = mlx_xpm_file_to_image(rc->mlx, path, &texture->width, \
+		&texture->height);
 	if (!texture->img)
-		exit(EXIT_FAILURE);
+	{
+		while (i < 4)
+		{
+			if (rc->texture[i].img != NULL)
+				mlx_destroy_image(rc->mlx, rc->texture[i].img);
+			i++;
+		}
+		return (2);
+	}
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_ppixel, \
-	&texture->line_len, &texture->endian);
+		&texture->line_len, &texture->endian);
+	return (0);
 }
 
 /*
 this function loads the textures from the cub data structure and stores them in
 the raycasting structure.
 */
-void	load_textures(t_ray *rc, t_textures textures)
+int	load_textures(t_ray *rc, t_textures textures)
 {
-	load_texture(rc, &rc->texture[0], textures.we);
-	load_texture(rc, &rc->texture[1], textures.ea);
-	load_texture(rc, &rc->texture[2], textures.no);
-	load_texture(rc, &rc->texture[3], textures.so);
+	int	err;
+
+	err = load_texture(rc, &rc->texture[0], textures.we);
+	if (err == 2)
+		return (2);
+	err = load_texture(rc, &rc->texture[1], textures.ea);
+	if (err == 2)
+		return (2);
+	err = load_texture(rc, &rc->texture[2], textures.no);
+	if (err == 2)
+		return (2);
+	err = load_texture(rc, &rc->texture[3], textures.so);
+	if (err == 2)
+		return (2);
+	return (0);
 }
 
 void	init_player_dir(t_cub *cub, t_ray *rc)
@@ -67,11 +90,27 @@ void	init_player_dir(t_cub *cub, t_ray *rc)
 this function initializes the raycasting structure according to the cub data
 structure and returns the raycasting structure.
 */
+
+void	free_err(t_ray *rc)
+{
+	if (rc->win)
+		mlx_destroy_window(rc->mlx, rc->win);
+	if (rc->mlx)
+		mlx_destroy_display(rc->mlx);
+	if (rc->mlx)
+		ft_free(rc->mlx);
+	free(rc);
+}
+
 t_ray	*init_raycasting(t_cub *cub)
 {
 	t_ray	*rc;
+	int		i;
 
+	i = 0;
 	rc = ft_calloc(1, sizeof(t_ray));
+	if (!rc)
+		return (NULL);
 	rc->mlx = mlx_init();
 	rc->win_width = 1600;
 	rc->win_height = 1200;
@@ -82,6 +121,12 @@ t_ray	*init_raycasting(t_cub *cub)
 	rc->map = &cub->map;
 	rc->floor_color = cub->styles.floor;
 	rc->ceiling_color = cub->styles.ceiling;
-	load_textures(rc, cub->textures);
+	while (++i < 4)
+		rc->texture[i].img = NULL;
+	if (load_textures(rc, cub->textures) == 2)
+	{
+		free_err(rc);
+		return (NULL);
+	}
 	return (rc);
 }
