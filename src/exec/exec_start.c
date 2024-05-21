@@ -20,8 +20,8 @@ int	handle_keypress(int keycode, t_ray *rc)
 {
 	if (keycode == 65307)
 	{
-		free_all(rc);
-		exit(0);
+		mlx_loop_end(rc->mlx);
+		return (0);
 	}
 	if (keycode == 119)
 		rc->move_forward = 1;
@@ -148,8 +148,7 @@ t_ray	*init_raycasting(t_cub *cub)
 
 int	handle_destroy(t_ray *rc)
 {
-	free_all(rc);
-	exit(0);
+	mlx_loop_end(rc->mlx);
 	return (0);
 }
 
@@ -167,4 +166,5 @@ void	start_exec(t_cub *cub)
 	mlx_loop_hook(rc->mlx, (int (*)(void *))update_frame, rc);
 	mlx_hook(rc->win, 17, 0, handle_destroy, rc);
 	mlx_loop(rc->mlx);
+	free_all(rc);
 }
