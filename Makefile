@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+         #
+#    By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 16:14:01 by lmattern          #+#    #+#              #
-#    Updated: 2024/05/20 16:38:44 by lmattern         ###   ########.fr        #
+#    Updated: 2024/05/21 13:10:57 by fprevot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ EXEC_SRC			:=	$(EXECDIR)/calc_wall_dim.c \
 						$(EXECDIR)/draw_scene.c \
 						$(EXECDIR)/exec_start.c \
 						$(EXECDIR)/exit.c \
-						$(EXECDIR)/move_amd_cam.c
+						$(EXECDIR)/move_amd_cam.c \
+						$(EXECDIR)/draw_line.c \
+						$(EXECDIR)/init_rc.c
 UTILS_SRC			:=	$(UTILSDIR)/utils_memory.c
 
 OBJDIR				:=	./.obj
