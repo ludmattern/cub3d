@@ -6,7 +6,7 @@
 /*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 13:07:02 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 16:58:29 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct s_ray
 	int			cam_left;
 	int			ceiling_color;
 	int			floor_color;
+	t_cub		*cub;
 	t_map		*map;
 	t_texture	texture[4];
 }	t_ray;
@@ -203,5 +204,6 @@ int		handle_keypress(int keycode, t_ray *rc);
 int		clean_exit(t_cub *cub, int exit_code);
 int		clean_return(char *line, char **lines, int status);
 void	free_all(t_ray *rc);
+int		handle_img_err(t_ray *rc);
 
 #endif	
