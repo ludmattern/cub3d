@@ -6,31 +6,16 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 16:52:36 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:01:19 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	print_map(t_map *map)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			ft_printf("%c", map->grid[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-}
-
+/*
+this function frees the memory allocated for the textures and the cub data 
+structure. It's meant to be called during the parsing process.
+*/
 int	clean_exit(t_cub *cub, int exit_code)
 {
 	ft_close(cub->filefd);
@@ -41,7 +26,10 @@ int	clean_exit(t_cub *cub, int exit_code)
 	ft_free(cub);
 	return (exit_code);
 }
-
+/*
+this function frees the memory allocated for the line and the lines array.
+It's meant to be called during the parsing process.
+*/
 int	clean_return(char *line, char **lines, int status)
 {
 	ft_free(line);

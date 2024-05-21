@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exec_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:07 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 10:20:31 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:18:27 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function handles the keypress event received by the mlx loop and updates 
+the raycasting structure accordingly.
+*/
 int	handle_keypress(int keycode, t_ray *rc)
 {
 	if (keycode == 65307)
@@ -34,6 +38,10 @@ int	handle_keypress(int keycode, t_ray *rc)
 	return (0);
 }
 
+/*
+this function handles the keyrelease event received by the mlx loop and updates
+the raycasting structure accordingly.
+*/
 int	handle_keyrelease(int keycode, t_ray *rc)
 {
 	if (keycode == 119)
@@ -51,6 +59,10 @@ int	handle_keyrelease(int keycode, t_ray *rc)
 	return (0);
 }
 
+/*
+this function load the texture from the path and stores it in the texture 
+creatingthe mlx image and getting the data address.
+*/
 void	load_texture(t_ray *rc, t_texture *texture, char *path)
 {
 	texture->img = mlx_xpm_file_to_image(rc->mlx, path, \
@@ -61,6 +73,10 @@ void	load_texture(t_ray *rc, t_texture *texture, char *path)
 	&texture->line_length, &texture->endian);
 }
 
+/*
+this function loads the textures from the cub data structure and stores them in
+the raycasting structure.
+*/
 void	load_textures(t_ray *rc, t_textures textures)
 {
 	load_texture(rc, &rc->texture[0], textures.no);
@@ -69,6 +85,10 @@ void	load_textures(t_ray *rc, t_textures textures)
 	load_texture(rc, &rc->texture[3], textures.we);
 }
 
+/*
+this function initializes the raycasting structure according to the cub data
+structure and returns the raycasting structure.
+*/
 t_ray	*init_raycasting(t_cub *cub)
 {
 	t_ray	*rc;
@@ -95,6 +115,10 @@ t_ray	*init_raycasting(t_cub *cub)
 	return (rc);
 }
 
+/*
+this function starts the game loop and handles the keypress and keyrelease 
+events.
+*/
 void	start_exec(t_cub *cub)
 {
 	t_ray	*rc;

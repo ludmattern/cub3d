@@ -6,12 +6,15 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 10:47:23 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:11:09 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function checks if the map is surrounded by walls.
+*/
 static int	inside_loop(t_pos *stack, int top, t_map *map, int heading[4][2])
 {
 	size_t	i;
@@ -41,6 +44,9 @@ static int	inside_loop(t_pos *stack, int top, t_map *map, int heading[4][2])
 	return (SUCCESS);
 }
 
+/*
+this function initializes the heading map helper for the flood fill algorithm.
+*/
 static void	init_heading_map(int heading[4][2])
 {
 	heading[0][0] = -1;
@@ -53,6 +59,10 @@ static void	init_heading_map(int heading[4][2])
 	heading[3][1] = 1;
 }
 
+/*
+this function performs a flood fill algorithm to check if the map is surrounded
+by walls.
+*/
 static int	flood_fill(t_map *map, int start_row, int start_col)
 {
 	int		top;
@@ -79,6 +89,10 @@ static int	flood_fill(t_map *map, int start_row, int start_col)
 	return (free(stack), SUCCESS);
 }
 
+/*
+this function replaces back the '2' by '0' in the map grid after the flood fill
+algorithm.
+*/
 void	replace_two_by_zeros(t_map *map)
 {
 	size_t	i;
@@ -98,6 +112,10 @@ void	replace_two_by_zeros(t_map *map)
 	}
 }
 
+/*
+this function checks if the map is surrounded by walls and returns an error if
+it's not then replaces back the '2' by '0' in the map grid after the flood fill.
+*/
 int	check_map_validity(t_map *map)
 {
 	size_t	row;

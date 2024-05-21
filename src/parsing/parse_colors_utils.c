@@ -6,12 +6,17 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/19 13:05:44 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:28:59 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function initializes the color map with the color prefix and the right 
+color pointer. It's used to parse the colors from the .cub file and assign them
+to the right pointer quickly.
+*/
 void	init_color_map(t_color_map *color_map, t_cub *cub)
 {
 	color_map[0] = (t_color_map){"F ", &cub->styles.floor};
@@ -19,6 +24,10 @@ void	init_color_map(t_color_map *color_map, t_cub *cub)
 	color_map[2] = (t_color_map){NULL, NULL};
 }
 
+/*
+this function extracts the color values from the line and returns them as a
+string.
+*/
 int	check_color_input(char *color)
 {
 	while (ft_isspace(*color))
@@ -32,6 +41,9 @@ int	check_color_input(char *color)
 	return (SUCCESS);
 }
 
+/*
+this function checks if the color string format (',') is valid.
+*/
 int	check_comma(char *str, const char *line)
 {
 	int	count;
@@ -48,6 +60,9 @@ int	check_comma(char *str, const char *line)
 	return (SUCCESS);
 }
 
+/*
+this function checks if the rgb color range value are valid.
+*/
 int	validate_rgb_range(int *value, const char *str)
 {
 	*value = ft_atoi(str);

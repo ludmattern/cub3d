@@ -6,12 +6,16 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 09:10:52 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:13:11 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function checks if the line contains invalid characters and if the player
+is set correctly.
+*/
 static int	check_line_char(char *line)
 {
 	int			i;
@@ -40,6 +44,9 @@ static int	check_line_char(char *line)
 	return (SUCCESS);
 }
 
+/*
+this function checks if the map is not too small and if the player is present.
+*/
 static int	last_checks(t_cub *cub, bool player, char *line)
 {
 	ft_free(line);
@@ -50,6 +57,10 @@ static int	last_checks(t_cub *cub, bool player, char *line)
 	return (SUCCESS);
 }
 
+/*
+this function extracts the map lines from the .cub file and checks if the map
+is well formatted.
+*/
 int	extract_map_lines(t_cub *cub, char **line, char ***lines)
 {
 	size_t	i;
@@ -78,6 +89,9 @@ int	extract_map_lines(t_cub *cub, char **line, char ***lines)
 	return (last_checks(cub, player, *line));
 }
 
+/*
+this function checks if the map is not cut off by empty lines.
+*/
 int	check_end_of_file(int fd, char **line)
 {
 	while (1)
@@ -92,6 +106,10 @@ int	check_end_of_file(int fd, char **line)
 	return (SUCCESS);
 }
 
+/*
+this function skips empty lines in the .cub file and returns an error if the map
+is missing.
+*/
 int	skip_empty_lines(int fd, char **line)
 {
 	*line = NULL;

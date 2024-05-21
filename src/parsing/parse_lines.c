@@ -6,12 +6,16 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 09:01:31 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 15:38:55 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:04:44 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function stores the player position in the t_cub structure and replaces the
+player character by a '0' in the map.
+*/
 static void	store_player_position(t_cub *cub, size_t i, size_t j, char heading)
 {
 	cub->player.x = j;
@@ -20,6 +24,10 @@ static void	store_player_position(t_cub *cub, size_t i, size_t j, char heading)
 	cub->map.grid[i][j] = '0';
 }
 
+/*
+thid function stores the right values of the cell in the map grid. If the cell
+is out of bounds, it stores a space.
+*/
 static void	store_grid_cell_value(t_cub *cub, size_t i, size_t j, char **lines)
 {
 	if (j < ft_strlen(lines[i]))
@@ -38,6 +46,10 @@ static void	store_grid_cell_value(t_cub *cub, size_t i, size_t j, char **lines)
 		cub->map.grid[i][j] = ' ';
 }
 
+/*
+this function finds the longest line in the map grid to set the least width of
+the map.
+*/
 size_t	find_longest_line(char **lines)
 {
 	size_t	i;
@@ -60,6 +72,10 @@ size_t	find_longest_line(char **lines)
 	return (max);
 }
 
+/*
+this function parses the lines from the .cub file and stores the map grid in the
+t_cub structure.
+*/
 int	parse_lines(t_cub *cub, char **lines)
 {
 	size_t	i;

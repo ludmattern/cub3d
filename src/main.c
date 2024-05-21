@@ -6,12 +6,15 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 10:47:31 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:53:08 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function parses the map from the .cub file checking for invalid characters.
+*/
 static int	parse_map(t_cub *cub)
 {
 	char	*line;
@@ -27,6 +30,9 @@ static int	parse_map(t_cub *cub)
 	return (clean_return(line, lines, SUCCESS));
 }
 
+/*
+this function parses the .cub file and checks if the map is valid.
+*/
 static int	parsing_data(t_cub *cub)
 {
 	if (!parse_parameters(cub))
@@ -39,6 +45,13 @@ static int	parsing_data(t_cub *cub)
 	return (SUCCESS);
 }
 
+/*
+this program is a 3D representation of a maze using raycasting.
+it uses the minilibx library to create a window and draw the maze.
+the maze and the textures are parsed from a .cub file.
+the player can move in the maze and rotate the camera.
+the input must be a .cub file.
+*/
 int	main(int argc, char **argv)
 {
 	t_cub	*cub;

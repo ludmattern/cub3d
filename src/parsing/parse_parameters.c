@@ -6,12 +6,15 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/20 15:59:29 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:02:24 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function checks if the necessary parameters are present in the .cub file.
+*/
 static bool	is_missing_parameters(t_cub *cub)
 {
 	if (!cub->styles.floor
@@ -24,6 +27,9 @@ static bool	is_missing_parameters(t_cub *cub)
 	return (false);
 }
 
+/*
+this function processes the line from the .cub file and calls the right function
+*/
 static int	process_line(t_cub *cub, char *line)
 {
 	if (!line)
@@ -39,6 +45,9 @@ static int	process_line(t_cub *cub, char *line)
 	return (free(line), ERROR);
 }
 
+/*
+this function parses the parameters from the .cub file.
+*/
 int	parse_parameters(t_cub *cub)
 {
 	char	*line;

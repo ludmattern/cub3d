@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/20 17:27:22 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:01:21 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,4 @@ int		clean_exit(t_cub *cub, int exit_code);
 int		clean_return(char *line, char **lines, int status);
 void	free_all(t_ray *rc);
 
-/////////////////////////////////* DEBUG *////////////////////////////////////
-void	print_map(t_map *map);
 #endif	

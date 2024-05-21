@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:13 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 10:13:59 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/05/21 11:26:28 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
+/*
+this function initializes the context structure with the values needed to draw
+the scene.
+*/
 void	ctx_scene_init(t_scene_ctx *ctx, t_ray *rc, int x, t_cub *cub)
 {
 	ctx->camera_x = 2 * x / (double)rc->win_width - 1; // direction de la cam
@@ -24,14 +28,15 @@ void	ctx_scene_init(t_scene_ctx *ctx, t_ray *rc, int x, t_cub *cub)
 	ctx->hit = 0;
 	ctx->ceiling_color = cub->styles.ceiling;
 	ctx->floor_color = cub->styles.floor;
-	printf("%d \n", cub->styles.floor);
-	printf("%d \n", cub->styles.ceiling);
 	ctx->texture_num = 0;
 	ctx->wall_x = 0;
 	ctx->texture_x = 0;
 	ctx->texture_y = 0;
 }
 
+/*
+this function changes the pixel color in the image.
+*/
 void	pixel_put_to_img(t_data_img *data, int x, int y, int color)
 {
 	char	*pix_in_grid;
@@ -40,6 +45,10 @@ void	pixel_put_to_img(t_data_img *data, int x, int y, int color)
 	*(unsigned int*)pix_in_grid = color;
 }
 
+/*
+this function calculates the dimensions, position and color of the wall to draw 
+then draws it.
+*/
 void	draw_tex(t_scene_ctx *ctx, t_ray *rc, int x, t_data_img *img)
 {
 	t_texture	*tex;
@@ -62,6 +71,9 @@ void	draw_tex(t_scene_ctx *ctx, t_ray *rc, int x, t_data_img *img)
 	}
 }
 
+/*
+this function draws all the line from the top to the bottom of the screen.
+*/
 void	draw_line(t_scene_ctx *ctx, t_ray *rc, int x, t_data_img *img)
 {
 	int	y;
@@ -75,6 +87,10 @@ void	draw_line(t_scene_ctx *ctx, t_ray *rc, int x, t_data_img *img)
 		pixel_put_to_img(img, x, y, ctx->floor_color);
 }
 
+/*
+this function calculates the right heading of the ray and the distance to the 
+next horizontal and vertical line.
+*/
 void	ray_dir(t_scene_ctx *ctx, t_ray *rc) //savoir dans quelle dir lance le ray te la dist avec la prochaine ligne //initialisation du rayon
 {
 	if (ctx->ray_dir_x < 0)
@@ -99,6 +115,9 @@ void	ray_dir(t_scene_ctx *ctx, t_ray *rc) //savoir dans quelle dir lance le ray 
 	}
 }
 
+/*
+this function returns the texture number according to the side of the wall hit.
+*/
 int	get_tex_num(t_scene_ctx *ctx)
 {
 	if (ctx->side == 0)
@@ -117,7 +136,10 @@ int	get_tex_num(t_scene_ctx *ctx)
 	}
 }
 
-
+/*
+the function is the direct drawing distance algorithm. It calculates the distance
+to the next wall and the side of the wall hit.
+*/
 void	dda(t_scene_ctx *ctx, t_ray *rc)
 {
 	while (ctx->hit == 0)
@@ -142,6 +164,9 @@ void	dda(t_scene_ctx *ctx, t_ray *rc)
 	}
 }
 
+/*
+this function draws the scene pixel by pixel on the x axis of the screen.
+*/
 void	draw_scene(t_ray *rc, int x, t_cub *cub)
 {
 	t_data_img	img;
