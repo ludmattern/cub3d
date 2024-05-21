@@ -69,8 +69,8 @@ void	load_texture(t_ray *rc, t_texture *texture, char *path)
 	&texture->width, &texture->height);
 	if (!texture->img)
 		exit(EXIT_FAILURE);
-	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel, \
-	&texture->line_length, &texture->endian);
+	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_ppixel, \
+	&texture->line_len, &texture->endian);
 }
 
 /*
@@ -89,6 +89,7 @@ void	init_player_dir(t_cub *cub, t_ray *rc)
 {
 	if (cub->player.heading == 'N')
 	{
+<<<<<<< HEAD
 		rc->dir_x = 0.0;
 		rc->dir_y = -1.01;
 		rc->plane_x = 0.66;
@@ -106,13 +107,30 @@ void	init_player_dir(t_cub *cub, t_ray *rc)
 		rc->dir_x = 1.01;
 		rc->dir_y = 0.0;
 		rc->plane_x = 0.0;
+=======
+		rc->dir_y = -1;
+		rc->plane_x = 0.66;
+	}
+	else if (cub->player.heading == 'S')
+	{
+		rc->dir_y = 1;
+		rc->plane_x = -0.66;
+	}
+	else if (cub->player.heading == 'E')
+	{
+		rc->dir_x = 1;
+>>>>>>> 0a608b4d9efbe6720ea15e0fda7f0fb95a99e4d9
 		rc->plane_y = 0.66;
 	}
 	else if (cub->player.heading == 'W')
 	{
+<<<<<<< HEAD
 		rc->dir_x = -1.01;
 		rc->dir_y = 0.0;
 		rc->plane_x = 0.0;
+=======
+		rc->dir_x = -1;
+>>>>>>> 0a608b4d9efbe6720ea15e0fda7f0fb95a99e4d9
 		rc->plane_y = -0.66;
 	}
 }
@@ -123,9 +141,9 @@ structure and returns the raycasting structure.
 */
 t_ray	*init_raycasting(t_cub *cub)
 {
-	t_ray *rc;
+	t_ray	*rc;
 
-	rc = malloc(sizeof(t_ray));
+	rc = ft_calloc(1, sizeof(t_ray));
 	rc->mlx = mlx_init();
 	rc->win_width = 1600;
 	rc->win_height = 1200;
@@ -134,12 +152,6 @@ t_ray	*init_raycasting(t_cub *cub)
 	rc->pos_y = (double)cub->player.y + 0.5;
 	init_player_dir(cub, rc);
 	rc->map = &cub->map;
-	rc->move_left = 0;
-	rc->move_right = 0;
-	rc->move_forward = 0;
-	rc->move_backward = 0;
-	rc->cam_left = 0;
-	rc->cam_right = 0;
 	rc->floor_color = cub->styles.floor;
 	rc->ceiling_color = cub->styles.ceiling;
 	load_textures(rc, cub->textures);
