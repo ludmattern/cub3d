@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:02:42 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 13:11:48 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/06/14 17:52:04 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,27 @@ void	pixel_put_to_img(t_data_img *data, int x, int y, int color)
 this function calculates the dimensions, position and color of the wall to draw 
 then draws it.
 */
-void	draw_tex(t_scene_ctx *ctx, t_ray *rc, int x, t_data_img *img)
+void    draw_tex(t_scene_ctx *ctx, t_ray *rc, int x, t_data_img *img)
 {
-	t_texture	*tex;
-	double		step;
-	double		tex_pos;
-	int			y;
-	int			color;
+    t_texture    *tex;
+    double        step;
+    double        tex_pos;
+    int            y;
+    int            color;
 
-	tex = &rc->texture[ctx->text_num];
-	step = 1.0 * tex->height / ctx->line_height;
-	tex_pos = (ctx->draw_start - rc->win_height / 2 + ctx->line_height
-			/ 2) * step;
-	y = ctx->draw_start;
-	while (y++ < ctx->draw_end)
-	{
-		ctx->texture_y = (int)tex_pos % tex->height;
-		tex_pos += step;
-		color = *(int *)(tex->addr + (ctx->texture_y
-					* tex->line_len + ctx->text_x * (tex->bits_ppixel / 8)));
-		pixel_put_to_img(img, x, y, color);
-	}
+    tex = &rc->texture[ctx->text_num];
+    step = 1.0 * tex->height / ctx->line_height;
+    tex_pos = (ctx->draw_start - rc->win_height / 2 + \
+    ctx->line_height / 2) * step;
+    y = ctx->draw_start;
+    while (y++ < ctx->draw_end)
+    {
+        ctx->texture_y = (int)tex_pos % tex->height;
+        tex_pos += step;
+        color = *(int *)(tex->addr + (ctx->texture_y * tex->line_len + \
+        (tex->width - 1 - ctx->text_x) * (tex->bits_ppixel / 8)));
+        pixel_put_to_img(img, x, y, color);
+    }
 }
 
 /*

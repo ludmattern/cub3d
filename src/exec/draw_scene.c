@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 17:05:22 by fprevot           #+#    #+#             */
-/*   Updated: 2024/06/14 11:41:42 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/06/14 17:47:32 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ int	get_tex_num(t_scene_ctx *ctx)
 	if (ctx->side == 0)
 	{
 		if (ctx->ray_dir_x < 0)
-			return (0);
-		else
 			return (1);
+		else
+			return (0);
 	}
 	else
 	{
 		if (ctx->ray_dir_y < 0)
-			return (2);
-		else
 			return (3);
+		else
+			return (2);
 	}
 }
 
@@ -121,7 +121,10 @@ void	draw_scene(t_ray *rc, int x)
 
 	img.img = mlx_new_image(rc->mlx, rc->win_width, rc->win_height);
 	if (!img.img)
+	{
+		ft_eprintf(ERR"%s\n", strerror(errno));
 		exit(handle_img_err(rc));
+	}
 	img.addr = mlx_get_data_addr(img.img, &img.bits_ppixel, \
 	&img.line_len, &img.endian);
 	img.width = rc->win_width;
