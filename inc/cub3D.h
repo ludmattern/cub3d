@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 17:14:40 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 16:58:29 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/06/14 10:04:28 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define ERR		"Error\n"
 # define ALLOC_ERR	"Failed to allocate memory"
 
-/* parsing structures */
+/* -------- parsing structures -------- */
 typedef struct s_position
 {
 	int			row;
@@ -85,7 +85,7 @@ typedef struct s_cub
 	t_textures	textures;
 }				t_cub;
 
-/* execution structures */
+/* -------- execution structures -------- */
 typedef struct s_texture
 {
 	void	*img;

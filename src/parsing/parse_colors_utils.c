@@ -6,7 +6,7 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 14:00:32 by lmattern          #+#    #+#             */
-/*   Updated: 2024/05/21 11:28:59 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/06/14 09:57:17 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,19 @@ string.
 */
 int	check_color_input(char *color)
 {
+	size_t	len;
+
+	len = 0;
 	while (ft_isspace(*color))
 		color++;
 	while (ft_isdigit(*color))
+	{
 		color++;
+		len++;
+	}
 	while (ft_isspace(*color))
 		color++;
-	if (*color)
+	if (*color || len == 0 || len > 3)
 		return (ERROR);
 	return (SUCCESS);
 }
