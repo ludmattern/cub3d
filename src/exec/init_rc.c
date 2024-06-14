@@ -6,7 +6,7 @@
 /*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:05:21 by fprevot           #+#    #+#             */
-/*   Updated: 2024/06/14 11:24:57 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/06/14 11:33:23 by fprevot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,7 @@ t_ray	*init_raycasting(t_cub *cub)
 	rc->win_height = 1200;
 	rc->win = mlx_new_window(rc->mlx, rc->win_width, rc->win_height, "Cub3D");
 	if (!rc->win)
-	{
-		mlx_destroy_window(rc->mlx, rc->win);
 		return (mlx_destroy_display(rc->mlx), free(rc->mlx), free(rc), NULL);
-	}
 	init_player_dir(cub, rc);
 	rc->map = &cub->map;
 	rc->floor_color = cub->styles.floor;
