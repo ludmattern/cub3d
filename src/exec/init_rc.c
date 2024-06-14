@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fprevot <fprevot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:05:21 by fprevot           #+#    #+#             */
-/*   Updated: 2024/06/14 11:33:23 by fprevot          ###   ########.fr       */
+/*   Updated: 2024/06/14 17:50:08 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,21 +110,24 @@ t_ray	*init_raycasting(t_cub *cub)
 
 	rc = ft_calloc(1, sizeof(t_ray));
 	if (!rc)
-		return (NULL);
+		return (ft_eprintf(ERR"%s\n", strerror(errno)), NULL);
 	rc->cub = cub;
 	rc->mlx = mlx_init();
 	if (!rc->mlx)
-		return (free(rc), NULL);
+		return (ft_eprintf(ERR"%s\n", strerror(errno)), free(rc), NULL);
 	rc->win_width = 1600;
 	rc->win_height = 1200;
 	rc->win = mlx_new_window(rc->mlx, rc->win_width, rc->win_height, "Cub3D");
 	if (!rc->win)
+	{
+		ft_eprintf(ERR"%s\n", strerror(errno));
 		return (mlx_destroy_display(rc->mlx), free(rc->mlx), free(rc), NULL);
+	}
 	init_player_dir(cub, rc);
 	rc->map = &cub->map;
 	rc->floor_color = cub->styles.floor;
 	rc->ceiling_color = cub->styles.ceiling;
 	if (load_textures(rc, cub->textures) == 2)
-		return (free_err(rc), NULL);
+		return (ft_eprintf(ERR"%s\n", strerror(errno)), free_err(rc), NULL);
 	return (rc);
 }

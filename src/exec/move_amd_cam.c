@@ -6,14 +6,14 @@
 /*   By: lmattern <lmattern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 16:03:24 by fprevot           #+#    #+#             */
-/*   Updated: 2024/05/21 11:36:01 by lmattern         ###   ########.fr       */
+/*   Updated: 2024/06/14 17:50:54 by lmattern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
 /*
-th function moves the player forward or backward depending on the key pressed.
+the function moves the player forward or backward depending on the key pressed.
 */
 void	move_forward_backward(t_ray *rc, double ms)
 {
